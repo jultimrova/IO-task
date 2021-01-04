@@ -1,10 +1,17 @@
-function App() {
+import Search from './components/Search';
+import AuthorList from './components/AuthorList';
+import './App.css';
+
+const App = () => {
     return (
-        <>
-            <header>
-                <h1>Hello world</h1>
-            </header>
-        </>
+        <div className='app'>
+            <div className='container'>
+                <main className='main'>
+                    <Search/>
+                    <AuthorList/>
+                </main>
+            </div>
+        </div>
     );
 }
 

@@ -1,0 +1,48 @@
+.authorList {
+    counter-reset: list;
+}
+
+.author {
+    display: grid;
+    grid-template-columns: 5% 80% 15%;
+    grid-template-rows: auto;
+    grid-template-areas: 'count info views';
+    align-items: center;
+    height: 120px;
+    color: #1d3648;
+    overflow: hidden;
+}
+
+.author:before {
+    grid-area: count;
+    margin-left: 15px;
+    counter-increment: list;
+    content: counter(list);
+    font-weight: 500;
+    color: #b1b1b1;
+}
+
+.author:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.authorInformation {
+    grid-area: info;
+    margin-left: 100px;
+}
+
+.authorViews {
+    grid-area: views;
+    text-align: center;
+}
+
+.authorName {
+    margin: 0;
+    line-height: 36px;
+
+}
+
+.authorPublication {
+    font-weight: 500;
+    color: #b1b1b1;
+}
