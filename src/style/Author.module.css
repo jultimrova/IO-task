@@ -1,0 +1,64 @@
+.author {
+    display: grid;
+    grid-template-columns: 20px 100px auto auto 15%;
+    grid-template-rows: auto;
+    grid-template-areas: 'incr icon info medal view';
+    height: 120px;
+    align-items: center;
+    text-align: center;
+}
+
+.author:nth-child(odd) {
+    background-color: white;
+}
+
+.authorIncrement {
+    grid-area: incr;
+    padding-left: 10px;
+}
+
+.authorIncrement:before {
+    counter-increment: list;
+    content: counter(list);
+    color: #c2c2c2;
+}
+
+.authorIcon {
+    grid-area: icon;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 20px;
+    line-height: 3em;
+    text-align: center;
+    color: #ffffff;
+    background: violet;
+    border-radius: 50%;
+}
+
+.authorInfo {
+    grid-area: info;
+    text-align: left;
+}
+
+.authorName {
+
+}
+
+.authorPublications {
+    color: #c2c2c2;
+}
+
+.medal {
+    grid-area: medal;
+    text-align: left;
+}
+
+.medal img {
+    width: 60px;
+    height: 60px;
+}
+
+.authorViews {
+    grid-area: view;
+    padding-right: 20px;
+}
