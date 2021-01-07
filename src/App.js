@@ -44,7 +44,9 @@ const App = () => {
                                 searchResult={searchResult}
                         />
                         {
-                            search ? searchResult.map((author, id) => {
+                            search ? searchResult
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((author, id) => {
                                 return <Author key={id} {...author} />
                             }) : <AuthorList/>
                         }

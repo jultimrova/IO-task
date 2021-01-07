@@ -8,9 +8,11 @@ const AuthorList = () => {
 
     return (
         <div className={style.authorList}>
-            {authors.map((author, index) => {
-                return <Author key={index} {...author}/>
-            })}
+            {authors
+                .sort((a, b) => b.pageviews - a.pageviews)
+                .map((author, index) => {
+                    return <Author key={index} {...author}/>
+                })}
         </div>
     )
 
