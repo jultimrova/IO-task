@@ -1,20 +1,19 @@
-const Pagination = ({authorsPerPage, totalAuthors, paginate}) => {
-    const pageNumbers = [];
+import style from '../../style/Pagination.module.css'
 
-    for (let i = 1; i <= Math.ceil(totalAuthors / authorsPerPage); i++) {
-        pageNumbers.push(i)
-    }
-
+const Pagination = ({currentPage, prevArrow, nextArrow}) => {
     return (
-        <nav>
-            <ul>
-                {pageNumbers.map(number => {
-                    return <li key={number}>
-                        <a onClick={() => paginate(number)} href="!#">{number}</a>
-                    </li>
-                })}
-            </ul>
-        </nav>
+        <>
+            <nav>
+                <ul className={style.pagination}>
+                    <div className={style.pagination}>
+                        {currentPage !== 1 ?
+                            <a href="!#" className={style.leftArrow} onClick={() => prevArrow}> </a> : ''}
+                        <span>1 - 10</span>
+                        <a href="!#" className={style.rightArrow} onClick={() => nextArrow}> </a>
+                    </div>
+                </ul>
+            </nav>
+        </>
     )
 }
 

@@ -6,7 +6,6 @@
     padding: 15px 0;
     align-items: center;
     text-align: center;
-    counter-reset: list;
 }
 
 .author:nth-child(odd) {
@@ -16,11 +15,6 @@
 .authorIncrement {
     grid-area: incr;
     padding-left: 10px;
-}
-
-.authorIncrement:before {
-    content: counter(list);
-    counter-increment: list;
     color: #c2c2c2;
 }
 

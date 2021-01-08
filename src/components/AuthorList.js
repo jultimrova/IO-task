@@ -1,21 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import style from '../style/AuthorList.module.css';
 import Author from './Author';
-import {AuthorContext} from '../App'
 
-const AuthorList = () => {
-    const authors = useContext(AuthorContext)
-
+const AuthorList = ({currentAuthors}) => {
     return (
-        <div className={style.authorList}>
-            {authors
+        <ol className={style.authorList}>
+            {currentAuthors
                 .sort((a, b) => b.pageviews - a.pageviews)
                 .map((author, index) => {
                     return <Author key={index} {...author}/>
                 })}
-        </div>
+        </ol>
     )
-
 }
 
 export default AuthorList;
