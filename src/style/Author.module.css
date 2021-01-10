@@ -1,6 +1,6 @@
 .author {
     display: grid;
-    grid-template-columns: 30px 100px auto 40% 10%;
+    grid-template-columns: 20px 100px 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 'incr icon info medal view';
     padding: 15px 0;
@@ -14,7 +14,7 @@
 
 .authorIncrement {
     grid-area: incr;
-    padding-left: 10px;
+    padding-left: 1rem;
     color: #c2c2c2;
 }
 
@@ -22,16 +22,17 @@
     grid-area: icon;
     width: 4rem;
     height: 4rem;
-    margin: 0 20px;
+    margin: 0 30px;
     line-height: 3em;
     text-align: center;
     color: #ffffff;
-    background: violet;
     border-radius: 50%;
+    box-shadow: 1px 1px 20px 4px rgba(0,0,0,0.5);
 }
 
 .authorInfo {
     grid-area: info;
+    padding-left: 10px;
     text-align: left;
 }
 
@@ -55,5 +56,6 @@
 
 .authorViews {
     grid-area: view;
-    padding-right: 20px;
+    padding-right: 2rem;
+    text-align: right;
 }

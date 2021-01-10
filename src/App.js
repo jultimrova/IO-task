@@ -20,7 +20,7 @@ const App = () => {
     const currentAuthors = authors.slice(indexOfFirstAuthor, indexOfLastAuthor);
     const totalAuthorsCount = authors.length;
 
-    sortByName();
+    //sortByName();
 
     function sortByPageView() {
         authors.sort((a, b) => b.pageviews - a.pageviews)
