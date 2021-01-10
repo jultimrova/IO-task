@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Search from './components/Search';
 import AuthorList from './components/AuthorList';
 import './App.css';
@@ -26,6 +26,7 @@ const App = () => {
         authors.sort((a, b) => b.pageviews - a.pageviews)
             .forEach((author, id) => {
                 author.position = id + 1;
+                author.iconColor = randomHex();
             })
     }
 
@@ -49,6 +50,10 @@ const App = () => {
         return Math.ceil(totalAuthorsCount / authorPerPage)
     }
 
+    function randomHex() {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }
+
     const handleChange = e => {
         setSearch(e.target.value);
     }
@@ -68,7 +73,7 @@ const App = () => {
                             handleChange={handleChange}
                             searchResult={searchResult}
                     />
-                    <AuthorList sortByName={sortByName} currentAuthors={search ? searchResult : currentAuthors}/>
+                    <AuthorList currentAuthors={search ? searchResult : currentAuthors}/>
                 </main>
             </div>
             <Pagination currentPage={currentPage}

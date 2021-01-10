@@ -3,11 +3,11 @@ import medal1tPlace from '../img/medals/1st.svg';
 import medal2Place from '../img/medals/2nd.svg';
 import medal3Place from '../img/medals/3rd.svg';
 
-const Author = ({name, count_pub, pageviews, position}) => {
+const Author = ({name, count_pub, pageviews, position, iconColor}) => {
     return (
         <li className={style.author}>
             <div className={style.authorIncrement}>{position}</div>
-            <div className={style.authorIcon}>{name[0]}</div>
+            <div className={style.authorIcon} style={{background: `${iconColor}`}}>{name[0]}</div>
             <div className={style.authorInfo}>
                 <div className={style.authorName}>{name}</div>
                 <div className={style.authorPublications}>{count_pub} публ.</div>
