@@ -7,7 +7,7 @@ const Pagination = ({currentPage, nextArrow, prevArrow, lastPage, currentAuthors
                 <ul className={style.pagination}>
                     <div className={style.pagination}>
                         {currentPage !== 1 ?
-                            <a href="!#" className={style.leftArrow} onClick={prevArrow}> </a> : ''}
+                            <a href="#" className={style.leftArrow} onClick={prevArrow}> </a> : ''}
                         <span>
                             {currentPage !== lastPage()
                                 ? (currentPage * authorPerPage - authorPerPage) + 1
@@ -17,7 +17,7 @@ const Pagination = ({currentPage, nextArrow, prevArrow, lastPage, currentAuthors
                                 : totalAuthors}
                         </span>
                         {currentPage !== lastPage() ?
-                            <a href="!#" className={style.rightArrow} onClick={nextArrow}> </a> : ''}
+                            <a href="#" className={style.rightArrow} onClick={nextArrow}> </a> : ''}
                     </div>
                 </ul>
             </nav>
