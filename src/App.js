@@ -12,10 +12,42 @@ const App = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [authorPerPage] = useState(10);
 
-    authors.sort((a, b) => b.pageviews - a.pageviews)
-        .forEach((author, id) => {
-            author.position = id + 1;
-        })
+    sortByPageView();
+
+    // Get current author
+    const indexOfLastAuthor = currentPage * authorPerPage;
+    const indexOfFirstAuthor = indexOfLastAuthor - authorPerPage;
+    const currentAuthors = authors.slice(indexOfFirstAuthor, indexOfLastAuthor);
+    const totalAuthorsCount = authors.length;
+
+    //sortByName();
+
+    function sortByPageView() {
+        authors.sort((a, b) => b.pageviews - a.pageviews)
+            .forEach((author, id) => {
+                author.position = id + 1;
+            })
+    }
+
+    function sortByName() {
+        currentAuthors.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    function prevArrow() {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    function nextArrow() {
+        if (currentPage < numOfPages()) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
+    function numOfPages() {
+        return Math.ceil(totalAuthorsCount / authorPerPage)
+    }
 
     const handleChange = e => {
         setSearch(e.target.value);
@@ -28,12 +60,6 @@ const App = () => {
         )
     }, [search, authors])
 
-    // Get current author
-    const indexOfLastAuthor = currentPage * authorPerPage;
-    const indexOfFirstAuthor = indexOfLastAuthor - authorPerPage;
-    const currentAuthors = authors.slice(indexOfFirstAuthor, indexOfLastAuthor);
-    const totalAuthorsCount = authors.length;
-
     return (
         <div className='app'>
             <div className='container'>
@@ -42,16 +68,16 @@ const App = () => {
                             handleChange={handleChange}
                             searchResult={searchResult}
                     />
-                    <AuthorList currentAuthors={search ? searchResult : currentAuthors}
-                    />
+                    <AuthorList sortByName={sortByName} currentAuthors={search ? searchResult : currentAuthors}/>
                 </main>
             </div>
-            <Pagination authorsPerPage={authorPerPage}
+            <Pagination currentPage={currentPage}
+                        authorPerPage={authorPerPage}
+                        currentAuthors={currentAuthors}
                         totalAuthors={authors.length}
-                        currentPage={currentPage}
                         prevArrow={prevArrow}
                         nextArrow={nextArrow}
-                        currentAuthors={currentAuthors}
+                        lastPage={numOfPages}
             />
         </div>
     );

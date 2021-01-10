@@ -5,11 +5,10 @@ import Author from './Author';
 const AuthorList = ({currentAuthors}) => {
     return (
         <ol className={style.authorList}>
-            {currentAuthors
-                .sort((a, b) => b.pageviews - a.pageviews)
-                .map((author, index) => {
-                    return <Author key={index} {...author}/>
-                })}
+            {currentAuthors.map((author, index) => {
+
+                return <Author key={index} {...author}/>
+            })}
         </ol>
     )
 }

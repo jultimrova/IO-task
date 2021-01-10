@@ -1,6 +1,6 @@
 .author {
     display: grid;
-    grid-template-columns: 20px 100px auto 25% 15%;
+    grid-template-columns: 30px 100px auto 40% 10%;
     grid-template-rows: auto;
     grid-template-areas: 'incr icon info medal view';
     padding: 15px 0;
@@ -45,7 +45,7 @@
 
 .medal {
     grid-area: medal;
-    text-align: left;
+    text-align: center;
 }
 
 .medal img {
