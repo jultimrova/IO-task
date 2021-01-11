@@ -3,35 +3,60 @@ import Search from './components/Search';
 import AuthorList from './components/AuthorList';
 import './App.css';
 import data from './data/data.json';
-import Pagination from "./components/common/Pagination";
+import Pagination from './components/common/Pagination';
 
 const App = () => {
-    const [authors] = useState(data);
+    const [sortedAuthors, setSortedAuthors] = useState([]);
     const [search, setSearch] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [authorPerPage] = useState(10);
+    const [sortType, setSortType] = useState('pageviews');
 
     sortByPageView();
+
+    useEffect(() => {
+        const sortAuthors = type => {
+            const types = {
+                name: 'name',
+                pageviews: 'pageviews'
+            };
+            const sortProperty = types[type];
+
+            if (type === 'name') {
+                const sorted = [...data].sort((a,b) => a[sortProperty].localeCompare(b[sortProperty]));
+                setSortedAuthors(sorted);
+            }
+            if (type === 'pageviews') {
+                const sorted = [...data].sort((a, b) => b[sortProperty] - a[sortProperty]);
+                setSortedAuthors(sorted);
+            }
+        }
+
+        sortAuthors(sortType);
+    }, [sortType])
+
+    useEffect(() => {
+        setSearchResult(author => {
+                return data.filter(author => author.name.toLowerCase().includes(search.toLowerCase()));
+            }
+        )
+    }, [search, data])
+
+    console.log('authors ', sortedAuthors)
 
     // Get current author
     const indexOfLastAuthor = currentPage * authorPerPage;
     const indexOfFirstAuthor = indexOfLastAuthor - authorPerPage;
-    const currentAuthors = authors.slice(indexOfFirstAuthor, indexOfLastAuthor);
-    const totalAuthorsCount = authors.length;
-
-    //sortByName();
+    const currentAuthors = sortedAuthors.slice(indexOfFirstAuthor, indexOfLastAuthor);
+    const totalAuthorsCount = data.length;
 
     function sortByPageView() {
-        authors.sort((a, b) => b.pageviews - a.pageviews)
+        data.sort((a, b) => b.pageviews - a.pageviews)
             .forEach((author, id) => {
                 author.position = id + 1;
                 author.iconColor = randomHex();
             })
-    }
-
-    function sortByName() {
-        currentAuthors.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     function prevArrow() {
@@ -58,15 +83,12 @@ const App = () => {
         setSearch(e.target.value);
     }
 
-    useEffect(() => {
-        setSearchResult(author => {
-                return authors.filter(author => author.name.toLowerCase().includes(search.toLowerCase()));
-            }
-        )
-    }, [search, authors])
-
     return (
         <div className='app'>
+            <select onChange={e => setSortType(e.target.value)}>
+                <option value='pageviews'>by pageviews</option>
+                <option value='name'>by name</option>
+            </select>
             <div className='container'>
                 <main className='main'>
                     <Search search={search}
@@ -79,7 +101,7 @@ const App = () => {
             <Pagination currentPage={currentPage}
                         authorPerPage={authorPerPage}
                         currentAuthors={currentAuthors}
-                        totalAuthors={authors.length}
+                        totalAuthors={data.length}
                         prevArrow={prevArrow}
                         nextArrow={nextArrow}
                         lastPage={numOfPages}
